@@ -29,3 +29,17 @@ From 2nd Row, we select the item and now compare if we pick this at t2, would be
 
 Solution
 Created a Spring boot application which contains a rest API call to be used as the end point for getting the values.
+
+
+
+API CALL:
+
+POST: /app/calculateFoodSatisfactionValue
+Sample Body :
+7 4
+1 1
+4 3
+5 4
+7 5
+
+Sample File is added for more data
