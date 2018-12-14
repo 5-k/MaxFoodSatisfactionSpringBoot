@@ -2,7 +2,10 @@
 
 Problem Statement
 
-John , a very smart guy, like eating food. Now, John is at a restaurant and he has many different types of food to choose from. Gordon gets x amount of satisfaction and requires y amount of time to eat an item from the menu. Given t minutes, write a java program that reads the text file and ﬁnds out the maximum satisfaction that John can get from eating at the restaurant. You will be given a text file with the following format:
+John , a very smart guy, like eating food. Now, John is at a restaurant and he has many different types of 
+food to choose from. Gordon gets x amount of satisfaction and requires y amount of time to eat an item from the menu. 
+Given t minutes, write a java program that reads the text file and ﬁnds out the maximum satisfaction that
+John can get from eating at the restaurant. You will be given a text file with the following format:
 
  [t][Number of items on menu]
 
@@ -29,3 +32,17 @@ From 2nd Row, we select the item and now compare if we pick this at t2, would be
 
 Solution
 Created a Spring boot application which contains a rest API call to be used as the end point for getting the values.
+
+
+
+API CALL:
+
+POST: /app/calculateFoodSatisfactionValue
+Sample Body :
+7 4 \n
+1 1 \n
+4 3 \n
+5 4 \n
+7 5 
+
+Sample File is added for more data
