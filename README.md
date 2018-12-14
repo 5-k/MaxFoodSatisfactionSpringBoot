@@ -39,10 +39,10 @@ API CALL:
 
 POST: /app/calculateFoodSatisfactionValue
 Sample Body :
-7 4
-1 1
-4 3
-5 4
-7 5
+7 4 \n
+1 1 \n
+4 3 \n
+5 4 \n
+7 5 
 
 Sample File is added for more data
