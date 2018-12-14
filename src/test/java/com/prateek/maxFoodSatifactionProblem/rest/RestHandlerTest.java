@@ -1,51 +1,68 @@
 package com.prateek.maxFoodSatifactionProblem.rest;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
-import org.junit.Before;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.prateek.maxFoodSatifactionProblem.service.FoodSatisfactionCalculatorService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.http.MediaType;
+import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.context.WebApplicationContext;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.prateek.maxFoodSatifactionProblem.App;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@RunWith(SpringJUnit4ClassRunner.class)
+@RunWith(SpringRunner.class)
 @WebAppConfiguration
-@ContextConfiguration(classes = App.class)
-
+@WebMvcTest({FoodSatisfactionCalculatorService.class, RestHandler.class})
 public class RestHandlerTest {
 
-	@Autowired
-	private MockMvc mockMvc;
+    @Autowired
+    private MockMvc mockMvc;
 
-	private RestHandler restHandler;
+    @Autowired
+    private ObjectMapper objectMapper;
 
-	@Autowired
-	private WebApplicationContext webApplicationContext;
+    @Autowired
+    private FoodSatisfactionCalculatorService s;
 
-	@Autowired
-	private ObjectMapper objectMapper;
+    @Test
+    public void testAPI() throws JsonProcessingException, Exception {
 
-	@Before
-	public void setup() {
-		this.mockMvc = MockMvcBuilders.webAppContextSetup(this.webApplicationContext).build();
-	}
+        String input = "7 4" + "\n 1 1" + "\n4 3" + "\n5 4" + "\n7  5";
 
-	@Test
-	public void testAPI() throws JsonProcessingException, Exception {
+        mockMvc.perform(post("/app/calculateFoodSatisfactionValue")
+                .contentType(MediaType.ALL)
+                .content(input)
+                .accept(MediaType.ALL))
+                .andExpect(status().isOk());
+    }
 
-		String input = "7 4" + "\n 1 1" + "\n4 3" + "\n5 4" + "\n7  5";
+    @Test
+    public void testInValidJSON() throws JsonProcessingException, Exception {
 
-		mockMvc.perform(post("/clients").content(objectMapper.writeValueAsBytes(input))).andExpect(status().isOk());
-	}
+        String input = "1 1\n 1";
+
+        mockMvc.perform(post("/app/calculateFoodSatisfactionValue")
+                .contentType(MediaType.ALL)
+                .content(input)
+                .accept(MediaType.ALL))
+                .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    public void testAPIWithExceptionInputFromUser() throws JsonProcessingException, Exception {
+
+        String input = "Test";
+
+        mockMvc.perform(post("/app/calculateFoodSatisfactionValue")
+                .contentType(MediaType.ALL)
+                .content(input)
+                .accept(MediaType.ALL))
+                .andExpect(status().isBadRequest());
+    }
 
 }
