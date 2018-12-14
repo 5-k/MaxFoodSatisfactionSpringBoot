@@ -2,7 +2,10 @@
 
 Problem Statement
 
-John , a very smart guy, like eating food. Now, John is at a restaurant and he has many different types of food to choose from. Gordon gets x amount of satisfaction and requires y amount of time to eat an item from the menu. Given t minutes, write a java program that reads the text file and ﬁnds out the maximum satisfaction that John can get from eating at the restaurant. You will be given a text file with the following format:
+John , a very smart guy, like eating food. Now, John is at a restaurant and he has many different types of 
+food to choose from. Gordon gets x amount of satisfaction and requires y amount of time to eat an item from the menu. 
+Given t minutes, write a java program that reads the text file and ﬁnds out the maximum satisfaction that
+John can get from eating at the restaurant. You will be given a text file with the following format:
 
  [t][Number of items on menu]
 
